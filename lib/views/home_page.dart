@@ -18,12 +18,18 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, '/cart'),
-                  child: Icon(Icons.shopping_cart),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () => Navigator.pushNamed(context, '/cart'),
+                    child: Icon(Icons.shopping_cart),
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.pushNamed(context, '/history'),
+                    child: Icon(Icons.history),
+                  ),
+                ],
               ),
               StreamBuilder(
                   stream: ProductRepository.productStream,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecommerce_tutorial/model/product.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,6 +20,11 @@ class CartController extends ChangeNotifier {
 
   void remove(int index) {
     _cart.removeAt(index);
+    notifyListeners();
+  }
+
+  void clear() {
+    _cart = [];
     notifyListeners();
   }
 }

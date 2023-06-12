@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_tutorial/controller/cart_controller.dart';
+import 'package:ecommerce_tutorial/controller/order_controller.dart';
 import 'package:ecommerce_tutorial/firebase_options.dart';
 import 'package:ecommerce_tutorial/views/cart_page.dart';
+import 'package:ecommerce_tutorial/views/history_page.dart';
 import 'package:ecommerce_tutorial/views/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +24,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => CartController())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartController()),
+        ChangeNotifierProvider(create: (_) => OrderController())
+      ],
       child: MaterialApp(
         routes: {
           '/home': (context) => HomePage(),
-          '/cart': (context) => CartPage()
+          '/cart': (context) => CartPage(),
+          '/history': (context) => HistoryPage()
         },
         initialRoute: '/home',
       ),

@@ -1,4 +1,6 @@
 import 'package:ecommerce_tutorial/controller/cart_controller.dart';
+import 'package:ecommerce_tutorial/controller/order_controller.dart';
+import 'package:ecommerce_tutorial/model/order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -18,7 +20,16 @@ class CartPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(onPressed: () {}, child: Text('Checkout')),
+            Consumer<CartController>(
+              builder: (context, controller, _) => ElevatedButton(
+                  onPressed: () async {
+                    await Provider.of<OrderController>(context, listen: false)
+                        .order(Order(orderId: "", products: controller.cart));
+
+                    controller.clear();
+                  },
+                  child: Text('Checkout')),
+            ),
             Consumer<CartController>(
               builder: (context, controller, _) =>
                   Text("Total : Rp ${controller.cartTotal}"),
